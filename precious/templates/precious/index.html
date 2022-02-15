@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}资产总表{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'adminlte-3.2/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+{% endblock %}
+
+{% block breadcrumb %}
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0 text-dark">
+          资产总表
+          <small>Assets List</small>
+        </h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">主页</a></li>
+          <li class="breadcrumb-item active">资产总表</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row mb-auto">
+            <div class="col-md-12">
+
+            <div class="card">
+            <div class="card-header with-border">
+                <h3 class="card-title">资产总表<small>(不含软件)</small></h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table id="assets_table" class="table table-bordered table-striped width='100%'">
+                    <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>资产类型</th>
+                        <th>子类型</th>
+                        <th>资产名称</th>
+                        <th>SN</th>
+                        <th>业务线</th>
+                        <th>状态</th>
+                        <th>机房</th>
+                        <th>更新日期</th>
+                        <th>标签</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                        {% for asset in assets %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            {% if asset.asset_type == 'server' %}
+                                <td class="text-green text-bold">{{ asset.get_asset_type_display }}</td>
+                                <td>{{ asset.server.get_sub_asset_type_display }}</td>
+                            {% elif asset.asset_type == "networkdevice" %}
+                                <td class="text-yellow text-bold">{{ asset.get_asset_type_display }}</td>
+                                <td>{{ asset.networkdevice.get_sub_asset_type_display }}</td>
+                            {% elif asset.asset_type == "memorydevice" %}
+                                <td class="text-blue text-bold">{{ asset.get_asset_type_display }}</td>
+                                <td>{{ asset.storagedevice.get_sub_asset_type_display }}</td>
+                            {% elif asset.asset_type == "securitydevice" %}
+                                <td class="text-red text-bold">{{ asset.get_asset_type_display }}</td>
+                                <td>{{ asset.securitydevice.get_sub_asset_type_display }}</td>
+                            {% endif %}
+                                {% if asset.asset_type == 'server' %}
+                                    <td><a href="{% url 'precious:detail' asset.id %}">{{ asset.name }}</a></td>
+                                {% else %}
+                                    <td>{{ asset.name }}</td>
+                                {% endif %}
+                            <td>{{ asset.sn }}</td>
+                            <td>{{ asset.business_unit|default_if_none:"-" }}</td>
+                                {% if asset.status == 0 %}
+                                    <td><nav class="badge badge-success">{{ asset.get_status_display }}</nav></td>
+                                {% elif asset.status == 1 %}
+                                    <td><nav class="badge badge-warning">{{ asset.get_status_display }}</nav></td>
+                                {% elif asset.status == 2 %}
+                                    <td><nav class="badge badge-default">{{ asset.get_status_display }}</nav></td>
+                                {% elif asset.status == 3 %}
+                                    <td><nav class="badge badge-danger">{{ asset.get_status_display }}</nav></td>
+                                {% elif asset.status == 4 %}
+                                    <td><nav class="badge badge-info">{{ asset.get_status_display }}</nav></td>
+                                {% endif %}
+                            <td>{{ asset.idc|default:"-" }}</td>
+                            <td>{{ asset.m_time|date:"Y/m/d [H:m:s]" }}</td>
+                            <td>
+                                {% for tag in asset.tags.all %}
+                                    <nav class="badge badge-primary">{{ tag.name }}</nav>
+                            {% empty %}
+                                -
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                        <tr>没有数据！</tr>
+                    {% endfor %}
+
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>序号</th>
+                        <th>资产类型</th>
+                        <th>子类型</th>
+                        <th>资产名称</th>
+                        <th>SN</th>
+                        <th>业务线</th>
+                        <th>状态</th>
+                        <th>机房</th>
+                        <th>更新日期</th>
+                        <th>标签</th>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+            </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block script %}
+
+    <script src="{% static 'adminlte-3.2/plugins/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'adminlte-3.2/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+
+    <script>
+    $(function (){
+        $('#assets_table').DataTable({
+            "paging": true,        <!-- 允许分页 -->
+            "lengthChange": true,  <!-- 允许改变每页显示的行数 -->
+            "searching": true,     <!-- 允许内容搜索 -->
+            "ordering": true,      <!-- 允许排序 -->
+            "info": true,          <!-- 显示信息 -->
+            "autoWidth": false     <!-- 固定宽度 -->
+        });
+    });
+    </script>
+{% endblock %}

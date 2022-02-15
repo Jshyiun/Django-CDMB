@@ -1,0 +1,273 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>{% block title %}base{% endblock %}</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+{#    <!-- Bootstrap 4.6 -->#}
+{#    <link rel="stylesheet" href="{% static 'adminlte-3.2/plugins/bootstrap/js/bootstrap.min.js' %}">#}
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static 'adminlte-3.2/plugins/fontawesome-free/css/all.min.css' %}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="{% static 'adminlte-3.2/plugins/flag-icon-css/flag-icons.min.css' %}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static 'adminlte-3.2/dist/css/adminlte.min.css' %}">
+    <!-- AdminLTE Skins.
+         You can choose any other skin. Make sure you apply the skin
+         class to the body tag so the changes take effect. -->
+    <link rel="stylesheet" href="{% static 'adminlte-3.2/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css' %}">
+
+    {% block css %}{% endblock %}
+
+</head>
+<!--
+BODY TAG OPTIONS:
+=================
+Apply one or more of the following classes to get the
+desired effect
+|---------------------------------------------------------|
+| SKINS         | skin-blue                               |
+|               | skin-black                              |
+|               | skin-purple                             |
+|               | skin-yellow                             |
+|               | skin-red                                |
+|               | skin-green                              |
+|---------------------------------------------------------|
+|LAYOUT OPTIONS | fixed                                   |
+|               | layout-boxed                            |
+|               | layout-top-nav                          |
+|               | sidebar-collapse                        |
+|               | sidebar-mini                            |
+|---------------------------------------------------------|
+-->
+<body class="hold-transition skin-green sidebar-mini">
+<div class="wrapper">
+
+    <!-- Main Header -->
+    <nav class="main-header navbar navbar-expand navbar-light navbar-teal">
+        <!-- left sidebar link -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+            </li>
+        </ul>
+        <!-- Header Navbar -->
+        <!-- Navbar Right Menu-->
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link" data-toggle="dropdown">
+                    <i class="far fa-comments"></i>
+                    <span class="badge badge-danger navbar-badge">4</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <a href="#" class="dropdown-item">
+                        <!-- start messages-->
+                        <div class="media">
+                            <!-- User Image-->
+                            <img src="{% static 'adminlte-3.2/dist/img/user1-128x128.jpg' %}" alt="用户头像" class="img-size-50 mr-3 img-circle">
+                            <div class="media-body">
+                                <h3 class="dropdown-item-title">
+                                    Brad Diesel
+                                    <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                                </h3>
+                                <p class="text-sm">Please call me phone when you are free...</p>
+                            </div>
+                        </div>
+                        <!-- end messages -->
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+                </div>
+            </li>
+            <!-- /.messages-menu -->
+
+            <!-- Notifications Menu -->
+            <li class="nav-item dropdown">
+                <!-- Menu toggle button -->
+                <a href="#" class="nav-link" data-toggle="dropdown">
+                    <i class="far fa-bell"></i>
+                    <span class="badge badge-warning navbar-badge">10</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <span class="dropdown-header">You have 10 notifications</span>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-envelope mr-2"></i> 5 new member join
+                        <span class="float-right text-muted text-sm">3 minutes ago</span>
+                    </a>
+                    <!-- end notification -->
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item dropdown-footer">View All Notifications</a>
+                </div>
+            </li>
+            <!-- Tasks Menu -->
+            <li class="nav-item dropdown">
+                <!-- Menu toggle button -->
+                <a href="#" class="nav-link" data-toggle="dropdown">
+                    <i class="far fa-bell"></i>
+                    <span class="badge badge-warning navbar-badge">9</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <span class="dropdown-header">You have 9 tasks</span>
+                    <!-- The progress bar -->
+                    <div class="progress xs">
+                        <!-- Change the css width attribute to simulate progress -->
+                        <div class="progress-bar progress-bar-teal" style="width: 30%"
+                             role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                            <span class="sr-only">30% Complete</span>
+                        </div>
+                        <!-- end task item -->
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item dropdown-footer">View All Tasks</a>
+                </div>
+                <!-- User Account Menu -->
+
+            <li class="nav-compact dropdown">
+            <!-- Menu Toggle Button -->
+            <!-- The user image in the navbar -->
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" name="navbarDropdown2">
+                    <img src="{% static 'adminlte-3.2/dist/img/user2-160x160.jpg' %}" alt="用户图片"
+                         class="img-size-32 img-circle elevation-2">
+                    <!-- hidden-xs hides the username on small devices so only the image appears -->
+                    <span class="hidden-xs">系统管理员</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                    <!-- The user image in the menu -->
+                    <a class="dropdown-item" href="#">
+                        <img src="{% static 'adminlte-3.2/dist/img/user2-160x160.jpg' %}" alt="用户图片" class="img-circle">
+                        <p>
+                            系统管理员
+                            <small>2022-2-14</small>
+                        </p>
+                    </a>
+                    <!-- Menu Body-->
+                    <a class="dropdown-item" href="#">Followers</a>
+                    <a class="dropdown-item" href="#">Sales</a>
+                    <a class="dropdown-item" href="#">Friends</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="pull-left btn  btn-default">Profile</a>
+                    <a class="pull-right btn btn-default">Sign out</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Logo -->
+        <a href="#" class="brand-link text-sm-center text-lime">
+            <span class="brand-text font-weight-light">||=v=||C·D·M·B||=v=||</span>
+        </a>
+        <!-- sidebar: style can be found in sidebar.less -->
+        <div class="sidebar">
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <img src="{% static 'adminlte-3.2/dist/img/user2-160x160.jpg' %}" class="img-circle elevation-2" alt="用户图片">
+                </div>
+                <div class="info">
+                    <a href="#" class="d-block">Admin</a>
+                    <!-- Status -->
+                    <a href="#"><i class="fa fa-circle" style="color: #00d75e"></i>在线</a>
+                </div>
+            </div>
+
+            <!-- search form (optional) -->
+            <form class="form-inline">
+                <div class="input-group">
+                    <input class="form-control form-control-sidebar" type="search" placeholder="搜索" aria-label="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-sidebar" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <!-- /.search form -->
+
+            <!-- Sidebar Menu -->
+            <nav class="mt-2">
+               <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+                   <li class="nav-item menu-open">
+                       <a href="#" class="nav-link active">
+                           <i class="nav-icon fas fa-tachometer-alt"></i>
+                           <p>
+                               导航栏
+                               <i class="right fas fa-angle-left"></i>
+                           </p>
+                       </a>
+                       <ul class="nav nav-treeview">
+                           <li class="nav-item">
+                               <a href="{% url 'precious:dashboard' %}" class="nav-link active">
+                                   <i class="far fa-circle nav-icon"></i>
+                                   <p>仪表盘</p>
+                               </a>
+                           </li>
+                           <li class="nav-item">
+                           <a href="{% url 'precious:index' %}" class="nav-link active">
+                               <i class="far fa-circle nav-icon"></i>
+                               <p>资产总表</p>
+                           </a>
+                           </li>
+                       </ul>
+                   </li>
+               </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+
+        {% block breadcrumb %}{% endblock %}
+
+        <!-- Main Content -->
+        <section class="content container-fluid">
+            {# 主体内容全放到这里 #}
+            {% block content %}{% endblock %}
+        </section>
+        <!--- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <!-- To the Right -->
+        <div class="pull-right hidden-xs">
+            http://127.0.0.0.1:8000
+        </div>
+        <!-- Default to the left -->
+        <strong>Copyright &copy; 2022 <a href="http://127.0.0.0.1:8000" target="_blank"></a></strong>
+    </footer>
+
+
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED JS SCRIPTS -->
+
+<!-- jQuery 3 -->
+<script src="{% static 'adminlte-3.2/plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4.6 -->
+<script src="{% static 'adminlte-3.2/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'adminlte-3.2/dist/js/adminlte.min.js' %}"></script>
+
+{% block script %}{% endblock %}
+
+<script>
+    $('ul.sidebar-menu li').each(function (i){
+        if($(this).children().first().attr('href')==='{{ request.path }}'){
+            $(this).addClass('active');
+        }else{
+        }
+    });
+</script>
+</body>
+</html>
